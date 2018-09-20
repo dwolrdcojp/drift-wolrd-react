@@ -9,6 +9,66 @@ body {
 }
 
 .wolrd h1 {
-  font-family: Arial;
+  font-family: Helvetica;
   color: white;
+}
+
+.nav {
+  position: relative;
+  text-align: center;
+}
+
+.navigation-next {
+  position: fixed;
+  right: 0;
+  width: 50%;
+  height: 500px;
+}
+
+.navigation-prev {
+  position: fixed;
+  left: 0; 
+  width: 50%;
+  height: 500px;
+}
+
+.arrow {
+  width: 0; 
+  height: 0; 
+  border-top: 25px solid transparent;
+  border-bottom: 25px solid transparent;
+  
+  position: absolute;
+}
+
+.arrow-right {
+  border-left: 25px solid #fff;
+  right: 0;
+}
+
+.arrow-left {
+  border-right: 25px solid #fff; 
+  left: 0;
+}
+
+.container {
+  margin: 50% auto;
+  font-size: 30px;
+  position: relative;
+  width: 15em;
+}
+
+.input {
+  font-family: Helvetica;
+  padding: 4px;
+  width: 7%;
+  margin-bottom: 20px;
+}
+.button {
+  font-family: Helvetica;
+  padding: 5px;
+  width: 4%;
+  border: solid white 2px;
+  color: white;
+  background-color: black;
 }
