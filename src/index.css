@@ -121,4 +121,9 @@ body {
     color: white;
     background-color: black;
   }
+
+  input[type="text"] {
+    -webkit-appearance: none;
+    border-radius: 0;
+}
 }
