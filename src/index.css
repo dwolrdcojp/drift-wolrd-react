@@ -72,3 +72,53 @@ body {
   color: white;
   background-color: black;
 }
+
+@media (max-width: 800px) {
+
+  .wolrd h1 {
+    font-family: Helvetica;
+    font-size: 100%;
+    color: white;
+  }
+
+  .arrow {
+    width: 0; 
+    height: 0; 
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    
+    position: absolute;
+  }
+
+  .arrow-right {
+    border-left: 10px solid #fff;
+    right: 10px;
+  }
+
+  .arrow-left {
+    border-right: 10px solid #fff; 
+    left: 10px;
+  }
+
+  .container {
+    margin: 100% auto;
+    font-size: 10px;
+    position: relative;
+    width: 15em;
+  }
+
+  .input {
+    font-family: Helvetica;
+    padding: 4px;
+    width: 25%;
+    margin-bottom: 20px;
+  }
+  .button {
+    font-family: Helvetica;
+    padding: 5px;
+    width: 15%;
+    border: solid white 2px;
+    color: white;
+    background-color: black;
+  }
+}
