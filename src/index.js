@@ -43,7 +43,7 @@ class Image extends Component {
   let images = cars.map( image => {
     return <img 
     key={image} 
-    src={`https://d-wolrd.co/images/${image}.jpg`}
+    src={require(`./images/${image}.jpg`)}
     alt="Drift Car"
     />
   });
