@@ -2,9 +2,19 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import logo from './header.jpg';
+import ReactGA from 'react-ga';
+
+function initializeReactGA() {
+    ReactGA.initialize('UA-85908120-2');
+    ReactGA.pageview('/');
+}
 
 class Image extends Component {
     state = {page: 0}
+
+  componentDidMount(){
+    document.title = "DRIFTWOLRD"
+  }
 
   reset = () => {
     this.setState({
