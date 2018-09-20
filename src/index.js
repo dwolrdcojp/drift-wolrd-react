@@ -72,14 +72,14 @@ class Image extends Component {
       </div>
 
       <div className="navigation-next" onClick={this.nextPage}>
-        <div class="header container">
-          <div class="arrow arrow-right"></div>
+        <div className="header container">
+          <div className="arrow arrow-right"></div>
         </div>
       </div>
 
       <div className="navigation-prev" onClick={this.previousPage}>
-        <div class="header container">
-          <div class="arrow arrow-left"></div>
+        <div className="header container">
+          <div className="arrow arrow-left"></div>
         </div>
       </div>
 
