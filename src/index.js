@@ -53,7 +53,7 @@ class Image extends Component {
   let images = cars.map( image => {
     return <img 
     key={image} 
-    src={require(`./images/${image}.jpg`)}
+    src={process.env.PUBLIC_URL + `/images/${image}.jpg`}
     alt="Drift Car"
     />
   });
