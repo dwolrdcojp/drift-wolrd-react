@@ -1,7 +1,7 @@
 {
   "name": "drift-wolrd-react",
   "version": "0.1.0",
-  "homepage": "https://dwolrdcojp.github.io/drift-wolrd-react",
+  "homepage": "./",
   "private": true,
   "dependencies": {
     "gh-pages": "^2.0.0",
