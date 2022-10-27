@@ -11,6 +11,8 @@ body {
 .wolrd h1 {
   font-family: Helvetica;
   color: white;
+  display: block;
+  text-align: center;
 }
 
 .nav {
@@ -37,7 +39,6 @@ body {
   height: 0; 
   border-top: 25px solid transparent;
   border-bottom: 25px solid transparent;
-  
   position: absolute;
 }
 
@@ -61,7 +62,7 @@ body {
 .input {
   font-family: Helvetica;
   padding: 4px;
-  width: 7%;
+  width: 15%;
   margin-bottom: 20px;
 }
 .button {
