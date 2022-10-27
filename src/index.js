@@ -1,44 +1,40 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
+import React, { useState, useRef } from 'react';
+import ReactDOM from 'react-dom/client';
 import './index.css';
 import logo from './header.jpg';
 
-class Image extends Component {
-    state = {page: 0}
+function Header({page}) {
+  return <h1>{`Page ${page} of 500`} </h1>
+}
 
-  reset = () => {
-    this.setState({
-      page: 0
-    });
+export default function Image() {
+  const inputRef = useRef(null);
+  const [page, setPage] = useState(0);
+
+  const reset = () => {
+    setPage(0);
   }
 
-  nextPage = () => {
-    if (this.state.page !== 500)
-    this.setState({
-      page: this.state.page + 1
-    });
+  const nextPage = () => {
+    if (page !== 500)
+      setPage(page + 1);
   }
 
-  previousPage = () => {
-    if (this.state.page !== 0)
-    this.setState({
-      page: this.state.page - 1
-    });
+  const previousPage = () => {
+    if (page !== 0)
+      setPage(page - 1);
   }
 
-  clicked = () => {
-    let pageNumber = Number(this.refs.textBox.value);
+  function handleClick() {
+    const pageNumber = inputRef.current.value;
     if (pageNumber >= 0 && pageNumber <= 500)
-    this.setState({ 
-      page: pageNumber 
-    });
+      setPage(pageNumber);
   }
 
-  render() {
 
   const array = Array.from(Array(4504).keys())
 
-  let cars = array.slice(this.state.page * 9, this.state.page * 9 + 9);
+  let cars = array.slice(page * 9, page * 9 + 9);
 
   let images = cars.map( image => {
     return <img 
@@ -48,39 +44,42 @@ class Image extends Component {
     />
   });
 
+
   return (
     <div className="wolrd">
-
       <div className="nav">
-        <div className="logo" onClick={this.reset}>
+        <div className="logo" onClick={reset}>
           <img src={logo} alt="Driftwolrd Logo"/>
         </div>
-
-        <h1>{`Page ${this.state.page} of 500`}</h1>
-        <input className="input" ref="textBox" type="text" placeholder="Enter Page Number"/>
-        <button className="button" onClick={ (e) => { this.clicked(); } }>Go</button>
+        <Header page={page} />
+        <input 
+            className="input" 
+            ref={inputRef}
+            type="text" 
+            placeholder="Enter Page Number"
+        />
+        <button className="button" onClick={handleClick}>Go</button>
       </div>
 
-      <div className="navigation-next" onClick={this.nextPage}>
+      <div className="navigation-next" onClick={nextPage}>
         <div className="header container">
           <div className="arrow arrow-right"></div>
         </div>
       </div>
 
-      <div className="navigation-prev" onClick={this.previousPage}>
+      <div className="navigation-prev" onClick={previousPage}>
         <div className="header container">
           <div className="arrow arrow-left"></div>
         </div>
       </div>
 
       {images}
-
     </div>
-    );
-  };
+  );
 }
 
-ReactDOM.render(
-  <Image />, 
-  document.getElementById('root')
-  );
+const root = ReactDOM.createRoot(document.getElementById('root'));
+const element = <Image />;
+root.render(element);
+
+
