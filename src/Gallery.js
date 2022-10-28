@@ -18,9 +18,11 @@ function Header({page, setPage}) {
 }
 
 function Search({setPage}) {
+  const [name, setName] = useState();
 
   function handleClick(e) {
     e.preventDefault();
+    setName('');
     const pageNumber = Number(e.target.children[0].value);
     if (pageNumber > 0 && pageNumber <= 100)
       setPage(pageNumber);
@@ -31,6 +33,8 @@ function Search({setPage}) {
       <form onSubmit={handleClick}>
         <input  
           className="input"
+          value={name}
+          onChange={e => setName(e.target.value)}
           type="text"
           placeholder="Enter Page Number"
         />
