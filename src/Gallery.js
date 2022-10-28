@@ -71,20 +71,29 @@ function PageNav({direction, page, setPage}) {
   );
 }
 
-export default function Image() {
+function Images({page}) {
+
+  const array = Array.from(Array(4500).keys());
+
+  const cars = array.slice((page-1) * 45, (page-1) * 45 + 45);
+
+  const images = cars.map((image) => 
+        <img
+          key={image.toString()}
+          src={process.env.PUBLIC_URL + `/images/${image}.jpg`}
+          alt={image}
+        />
+  );
+
+  return (
+    <div className="images">
+      {images}
+    </div>
+  );
+}
+
+export default function Gallery() {
   const [page, setPage] = useState(1);
-
-  const array = Array.from(Array(4500).keys())
-
-  let cars = array.slice((page-1) * 45, (page-1) * 45 + 45);
-
-  let images = cars.map(image => {
-    return <img 
-      key={image} 
-      src={process.env.PUBLIC_URL + `/images/${image}.jpg`}
-      alt={image}
-    />
-  });
 
   return (
     <div className="wolrd">
@@ -93,7 +102,7 @@ export default function Image() {
         <Search setPage={setPage} />
         <PageNav direction='left' page={page} setPage={setPage} />
         <PageNav direction='right' page={page} setPage={setPage} />
-        {images}
+        <Images page={page} />
       </div>
     </div>
   );

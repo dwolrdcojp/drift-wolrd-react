@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom/client';
 import './index.css';
-import Image from './Image.js';
+import Gallery from './Gallery.js';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-const element = <Image />;
+const element = <Gallery />;
 root.render(element);
 
 
