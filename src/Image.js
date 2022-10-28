@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
 import './index.css';
 import logo from './header.jpg';
 
@@ -18,24 +18,25 @@ function Header({page, setPage}) {
 }
 
 function Search({setPage}) {
-  const inputRef = useRef(null);
 
-  function handleClick() {
-    const pageNumber = Number(inputRef.current.value);
+  function handleClick(e) {
+    e.preventDefault();
+    const pageNumber = Number(e.target.children[0].value);
     if (pageNumber > 0 && pageNumber <= 100)
       setPage(pageNumber);
   }
 
   return (
-    <>
-        <input 
-            className="input" 
-            ref={inputRef}
-            type="text" 
-            placeholder="Enter Page Number"
+    <div>
+      <form onSubmit={handleClick}>
+        <input  
+          className="input"
+          type="text"
+          placeholder="Enter Page Number"
         />
-        <button className="button" onClick={handleClick}>Go</button>
-    </>
+        <button className="button" type="submit">Go</button>
+      </form>
+    </div>
   );
 }
 
