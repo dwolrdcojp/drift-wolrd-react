@@ -11,7 +11,7 @@ function Header({page, setPage}) {
    <div> 
       <div className="logo" onClick={reset}>
         <img src={logo} alt="Driftwolrd Logo"/>
-        <h1 className="wolrd">{`Page ${page} of 500`} </h1>
+        <h1 className="wolrd">{`Page ${page} of 100`} </h1>
       </div>
     </div>
   );
@@ -22,7 +22,7 @@ function Search({setPage}) {
 
   function handleClick() {
     const pageNumber = Number(inputRef.current.value);
-    if (pageNumber > 0 && pageNumber <= 500)
+    if (pageNumber > 0 && pageNumber <= 100)
       setPage(pageNumber);
   }
 
@@ -42,12 +42,12 @@ function Search({setPage}) {
 function PageNav({direction, page, setPage}) {
 
   function handleRight() {
-    if (page > 0 && page <= 500)
+    if (page > 0 && page < 100)
       setPage(page+1);
   }
 
   function handleLeft() {
-    if (page > 1 && page <= 500)
+    if (page > 1 && page <= 100)
       setPage(page-1);
   }
   return ( 
@@ -73,15 +73,15 @@ function PageNav({direction, page, setPage}) {
 export default function Image() {
   const [page, setPage] = useState(1);
 
-  const array = Array.from(Array(4504).keys())
+  const array = Array.from(Array(4500).keys())
 
-  let cars = array.slice((page-1) * 9, (page-1) * 9 + 9);
+  let cars = array.slice((page-1) * 45, (page-1) * 45 + 45);
 
   let images = cars.map(image => {
     return <img 
       key={image} 
       src={process.env.PUBLIC_URL + `/images/${image}.jpg`}
-      alt="Drift Car"
+      alt={image}
     />
   });
 
