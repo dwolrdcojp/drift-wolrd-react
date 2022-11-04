@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import './index.css';
-import logo from './header.jpg';
 
 function Header({page, setPage}) {
   const reset = () => {
@@ -10,8 +9,8 @@ function Header({page, setPage}) {
   return (
    <div> 
       <div className="logo" onClick={reset}>
-        <img src={logo} alt="Driftwolrd Logo"/>
-        <h1 className="wolrd">{`Page ${page} of 100`} </h1>
+        <h1 classname="header"> DRIFTWOLRD </h1>
+        <h2 className="wolrd">{`Page ${page} of 100`} </h2>
       </div>
     </div>
   );
@@ -36,7 +35,7 @@ function Search({setPage}) {
           value={name}
           onChange={e => setName(e.target.value)}
           type="text"
-          placeholder="Enter Page Number"
+          placeholder="Page Number"
         />
         <button className="button" type="submit">Go</button>
       </form>
@@ -44,17 +43,8 @@ function Search({setPage}) {
   );
 }
 
-function PageNav({direction, page, setPage}) {
+function PageNav({direction, handleLeft, handleRight }) {
 
-  function handleRight() {
-    if (page > 0 && page < 100)
-      setPage(page+1);
-  }
-
-  function handleLeft() {
-    if (page > 1 && page <= 100)
-      setPage(page-1);
-  }
   return ( 
     <>
       {direction === 'right' &&
@@ -77,9 +67,7 @@ function PageNav({direction, page, setPage}) {
 
 function Images({page}) {
 
-  const array = Array.from(Array(4500).keys());
-
-  const cars = array.slice((page-1) * 45, (page-1) * 45 + 45);
+  const cars = Array.from(new Array(45), (x, i) => i + (page -1) * 45);
 
   const images = cars.map((image) => 
         <img
@@ -99,13 +87,23 @@ function Images({page}) {
 export default function Gallery() {
   const [page, setPage] = useState(1);
 
+  function handleRight() {
+    if (page > 0 && page < 100)
+      setPage(page+1);
+  }
+
+  function handleLeft() {
+    if (page > 1 && page <= 100)
+      setPage(page-1);
+  }
+
   return (
     <div className="wolrd">
       <div className="nav">
         <Header page={page} setPage={setPage} />
         <Search setPage={setPage} />
-        <PageNav direction='left' page={page} setPage={setPage} />
-        <PageNav direction='right' page={page} setPage={setPage} />
+        <PageNav direction='left'  handleLeft={handleLeft} />
+        <PageNav direction='right' handleRight={handleRight} />
         <Images page={page} />
       </div>
     </div>
