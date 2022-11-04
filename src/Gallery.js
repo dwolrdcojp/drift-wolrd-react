@@ -66,8 +66,6 @@ function PageNav({direction, handleLeft, handleRight }) {
 }
 
 function Images({page}) {
-  const [imagesLoaded, setImagesLoaded] = useState(false);
-
   const cars = Array.from(new Array(45), (x, i) => i + (page -1) * 45);
 
   const images = cars.map((image) => (
@@ -76,38 +74,9 @@ function Images({page}) {
         url: `${process.env.PUBLIC_URL}` + `/images/${image}.jpg`
       }));
 
-  useEffect(() => {
-    let isLoaded = true;
-    setImagesLoaded(false);
-    const loadImage = image => {
-      return new Promise((resolve, reject) => {
-        const loadImg = new Image()
-        loadImg.src = image.url
-        loadImg.onload = () => {
-          resolve(image.url);
-        }
-
-        loadImg.onerror = err => reject(err)
-      })
-    }
-
-    Promise.all(images.map(image => loadImage(image)))
-      .then(() =>  (isLoaded ? setImagesLoaded(true) : null ))
-      .catch(err => console.log("Failed to load images", err))
-    
-    return () => (isLoaded = false);
-  }, [images])
-
-
   return (
     <div className="images">
-    {imagesLoaded ? (
-      images.map(image => (
-        <img key={image.id} src={image.url}/>
-         ))
-       ) : (
-        <h2 className="wolrd">Loading images...</h2> 
-       )}
+      { images.map(image => (<img key={image.id} src={image.url}/>)) }
     </div>
   );
 }
