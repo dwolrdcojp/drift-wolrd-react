@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './index.css';
 
 function Header({page, setPage}) {
@@ -9,7 +9,7 @@ function Header({page, setPage}) {
   return (
    <div> 
       <div className="logo" onClick={reset}>
-        <h1 classname="header"> DRIFTWOLRD </h1>
+        <h1 className="header"> DRIFTWOLRD </h1>
         <h2 className="wolrd">{`Page ${page} of 100`} </h2>
       </div>
     </div>
@@ -66,20 +66,48 @@ function PageNav({direction, handleLeft, handleRight }) {
 }
 
 function Images({page}) {
+  const [imagesLoaded, setImagesLoaded] = useState(false);
 
   const cars = Array.from(new Array(45), (x, i) => i + (page -1) * 45);
 
-  const images = cars.map((image) => 
-        <img
-          key={image.toString()}
-          src={process.env.PUBLIC_URL + `/images/${image}.jpg`}
-          alt={image}
-        />
-  );
+  const images = cars.map((image) => (
+      { 
+        id: `${image}`,
+        url: `${process.env.PUBLIC_URL}` + `/images/${image}.jpg`
+      }));
+
+  useEffect(() => {
+    let isLoaded = true;
+    setImagesLoaded(false);
+    const loadImage = image => {
+      return new Promise((resolve, reject) => {
+        const loadImg = new Image()
+        loadImg.src = image.url
+        loadImg.onload = () => {
+          resolve(image.url);
+        }
+
+        loadImg.onerror = err => reject(err)
+      })
+    }
+
+    Promise.all(images.map(image => loadImage(image)))
+      .then(() =>  (isLoaded ? setImagesLoaded(true) : null ))
+      .catch(err => console.log("Failed to load images", err))
+    
+    return () => (isLoaded = false);
+  }, [images])
+
 
   return (
     <div className="images">
-      {images}
+    {imagesLoaded ? (
+      images.map(image => (
+        <img key={image.id} src={image.url}/>
+         ))
+       ) : (
+        <h2 className="wolrd">Loading images...</h2> 
+       )}
     </div>
   );
 }
